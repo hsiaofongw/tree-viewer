@@ -1,0 +1,63 @@
+@highlight: #e6f7ff;
+@d-blue: #105a9d;
+
+.hide {
+  visibility: hidden;
+}
+
+.button-like {
+  cursor: pointer;
+}
+
+.container {
+  display: flex;
+  font-family: Monaco, Menlo, monospace;
+}
+
+.expand-icon {
+  margin-right: 4px;
+}
+
+.container:hover {
+  background-color: @highlight;
+}
+
+.icon-and-text {
+  display: flex;
+  flex: 1;
+}
+
+.right-icons {
+  display: flex;
+  column-gap: 4px;
+  display: flex;
+  align-items: center;
+}
+
+.right-icons > * {
+  cursor: pointer;
+}
+
+.edit-icon {
+  cursor: pointer;
+  margin-left: 4px;
+  visibility: hidden;
+}
+
+.container:hover .edit-icon {
+  visibility: visible;
+}
+
+.hover-color:hover {
+  color: @d-blue;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  row-gap: 10px;
+}
+
+.highlight {
+  background-color: @highlight;
+}

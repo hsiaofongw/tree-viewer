@@ -1,0 +1,69 @@
+<div>
+  <div
+    class="container"
+    [class.button-like]="root.type === 'branch'"
+    (click)="$event.stopPropagation(); _expand = !_expand"
+    [class.highlight]="_highlight"
+  >
+    <div class="icon-and-text">
+      <div [style.width.px]="unitIndent * path.length"></div>
+      <div>
+        <i
+          class="expand-icon hover-color"
+          [class.hide]="root.type === 'leaf'"
+          nz-icon
+          [nzType]="_expand ? 'minus-square' : 'plus-square'"
+          nzTheme="outline"
+        ></i>
+        <span>{{ root.name }}</span>
+        <i
+          (click)="$event.stopPropagation(); goEdit()"
+          class="edit-icon hover-color"
+          nz-icon
+          nzType="edit"
+          nzTheme="outline"
+        ></i>
+      </div>
+    </div>
+    <div class="right-icons" (click)="$event.stopPropagation()">
+      <i class="hover-color" nz-icon nzType="left-square" nzTheme="outline" (click)="appendChild()"></i>
+      <i class="hover-color" nz-icon nzType="down-square" nzTheme="outline" (click)="insertNext()"></i>
+      <i
+        class="hover-color"
+        nz-icon
+        nzType="close-square"
+        nzTheme="outline"
+        nz-popconfirm
+        nzPopconfirmTitle="确定要删除吗？"
+        nzPopconfirmPlacement="bottom"
+        (nzOnConfirm)="deleteThis()"
+      ></i>
+    </div>
+  </div>
+  <div *ngIf="root.type === 'branch' && _expand">
+    <div *ngFor="let child of root.children">
+      <app-tree-viewer
+        [path]="path.concat([child.id])"
+        [root]="child"
+        [parent]="root"
+      ></app-tree-viewer>
+    </div>
+  </div>
+</div>
+
+<nz-modal
+  [nzOkText]="'保存'"
+  [(nzVisible)]="_showModal"
+  nzTitle="编辑"
+  (nzOnCancel)="cancel()"
+  (nzOnOk)="save()"
+  [nzOkDisabled]="_form.invalid"
+  [nzTitle]="modalTitle"
+>
+  <ng-container *nzModalContent>
+    <form class="form" [formGroup]="_form">
+      <input nz-input placeholder="键" formControlName="key" />
+      <input nz-input placeholder="值" formControlName="value" />
+    </form>
+  </ng-container>
+</nz-modal>
