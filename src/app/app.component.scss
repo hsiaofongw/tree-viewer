@@ -1,0 +1,26 @@
+.outer-container {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  box-sizing: border-box;
+  padding: 20px;
+}
+
+.container {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  box-sizing: border-box;
+  display: flex;
+  column-gap: 20px;
+  align-items: stretch;
+}
+
+.box {
+  border: 1px solid #ccc;
+  overflow: auto;
+  flex: 1;
+  box-sizing: border-box;
+  padding: 10px;
+}
+
